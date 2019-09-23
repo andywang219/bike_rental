@@ -1,0 +1,90 @@
+#learnMore {
+    margin-top: 55px;
+    margin-left: 25px;
+    color: black;
+    border-color: black;
+    border: 1.7px solid black;
+    font-family: 'Raleway', sans-serif;
+}
+
+#learnMore:hover {
+    background-color: rgba(0, 0, 0, .1);
+    color: black;
+}
+
+.jumboText {
+    margin-left: 25px;
+    padding-top: 55px;
+    color: black;
+    font-family: 'Raleway', sans-serif;
+    font-size: 4em;
+    text-shadow: 3px 5px 7px rgba(255, 255, 255, 0.24);
+}
+
+.subJumboText {
+    margin-left: 25px;
+    color: black;
+    font-family: 'Raleway', sans-serif;
+    text-shadow: 3px 5px 7px rgba(255, 255, 255, 0.24);
+}
+
+.jumbotron {
+    height: 90vh;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    background-image: url('https://images.unsplash.com/photo-1554230674-9fd2111aa270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 40%;
+    background-attachment: fixed;
+}
+
+.links {
+    display: block;
+    padding: .5rem 1rem;
+    color: black;
+    text-decoration: none;
+}
+
+.links:hover {
+    color: blue;
+    text-decoration: none;
+}
+
+.rentalText {
+    margin-bottom: 25px;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 3.3em;
+}
+
+.rentals {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.bikeImg {
+    margin-bottom: 10px;
+}
+
+.shopLink {
+    color: black;
+    text-decoration: none;
+}
+
+.shopLink:hover {
+    text-decoration: none;
+    cursor: pointer;
+    color: blue;
+}
+
+.item {
+    margin: 15px;
+}
+
+section {
+    margin-top: 55px;
+}
