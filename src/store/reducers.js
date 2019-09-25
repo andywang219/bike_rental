@@ -11,6 +11,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 cart: [...state.cart, ...action.payload]
             }
+        case actionTypes.UPDATE_CART:
+            return {
+                ...state,
+                cart: []
+            }
         default: 
     }
 
