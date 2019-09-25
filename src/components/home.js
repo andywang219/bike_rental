@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Button from 'react-bootstrap/Button';
 import * as actionTypes from '../store/actions';
@@ -15,27 +12,18 @@ class Home extends Component {
         super(props);
         this.cart = []
 
-        this.handleScrollToElement = this.handleScrollToElement.bind(this);
         this.rentalScroll = React.createRef();
-        this.accessScroll = React.createRef();
-        this.addScroll = React.createRef();
     }
     
     handleScrollToElement(pos) {
-        if(pos === 'rentalScroll') {
-            this.rentalScroll.current.scrollIntoView({behavior: "smooth", block: "center"});
-        } else if(pos === 'accessScroll') {
-            this.accessScroll.current.scrollIntoView({behavior: "smooth", block: "center"});
-        } else {
-            this.addScroll.current.scrollIntoView({behavior: "smooth", block: "center"});
-        }
+		this.rentalScroll.current.scrollIntoView({behavior: "smooth", block: "center"});
     }
-
+    
     // add items to the cart
     cartHandler(item) {
-        this.cart.push(item)
+        this.cart.push(item.id)
         this.props.onSetCart([...this.cart])
-        console.log('this.props.cart ', this.props.cart)
+        this.cart = []
     }
 
     render() {
@@ -86,42 +74,6 @@ class Home extends Component {
 
         return (
             <div>
-                {/* Navbar */}
-                <Navbar bg='light' expand='lg' fixed='top' style={{width: '100%'}}>
-                    <Navbar.Brand><Link to='/' style={{textDecoration: 'none'}}>Bikey</Link></Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="mr-auto">
-                            <NavDropdown title="Shop" id="collasible-nav-dropdown">
-                                <Link 
-                                    to='#bikes' 
-                                    className='links' 
-                                    onClick={() => this.handleScrollToElement('rentalScroll')}
-                                >
-                                    Bike Rentals
-                                </Link>
-                                <Link 
-                                    to='#accessories' 
-                                    className='links' 
-                                    onClick={() => this.handleScrollToElement('accessScroll')}
-                                >
-                                    Accessories
-                                </Link>
-                                <Link 
-                                    to='#addons' 
-                                    className='links' 
-                                    onClick={() => this.handleScrollToElement('addScroll')}
-                                >
-                                    Addons
-                                </Link>
-                            </NavDropdown>
-                        </Nav>
-                        <Nav>
-                            <Link to='cart' className='links'>Cart<sup style={{color: 'red'}}>{this.props.cart.length}</sup></Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
-
                 {/* Homepage jumbotron */}
                 <Jumbotron fluid>
                     <h1 className='jumboText'>Let's Get Riding!</h1>
@@ -131,7 +83,7 @@ class Home extends Component {
                         id='learnMore' 
                         size='lg' 
                         variant="outline-primary" 
-                        onClick={this.handleScrollToElement}
+                        onClick={() => this.handleScrollToElement('rentalScroll')}
                     >
                         Explore
                     </Button>

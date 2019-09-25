@@ -1,0 +1,36 @@
+#cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#cartTitle {
+    margin-top: 1.5em;
+    margin-bottom: 25px;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 3.3em;
+}
+
+.cartItem {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: wrap;
+    text-align: center;
+}
+
+.cartDesc {
+    margin: 10px;
+    width: 140px;
+}
+
+.removeSection {
+    margin: 10px;
+    widows: 150px;
+}
+
+.removeSection > select, Button {
+    margin: 10px;
+}
