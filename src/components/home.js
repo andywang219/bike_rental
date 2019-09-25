@@ -33,9 +33,9 @@ class Home extends Component {
 
     // add items to the cart
     cartHandler(item) {
-        this.cart.push(item)
+        this.cart.push(item.id)
         this.props.onSetCart([...this.cart])
-        console.log('this.props.cart ', this.props.cart)
+        this.cart = []
     }
 
     render() {
@@ -94,21 +94,21 @@ class Home extends Component {
                         <Nav className="mr-auto">
                             <NavDropdown title="Shop" id="collasible-nav-dropdown">
                                 <Link 
-                                    to='#bikes' 
+                                    to='#' 
                                     className='links' 
                                     onClick={() => this.handleScrollToElement('rentalScroll')}
                                 >
                                     Bike Rentals
                                 </Link>
                                 <Link 
-                                    to='#accessories' 
+                                    to='#' 
                                     className='links' 
                                     onClick={() => this.handleScrollToElement('accessScroll')}
                                 >
                                     Accessories
                                 </Link>
                                 <Link 
-                                    to='#addons' 
+                                    to='#' 
                                     className='links' 
                                     onClick={() => this.handleScrollToElement('addScroll')}
                                 >
@@ -131,7 +131,7 @@ class Home extends Component {
                         id='learnMore' 
                         size='lg' 
                         variant="outline-primary" 
-                        onClick={this.handleScrollToElement}
+                        onClick={() => this.handleScrollToElement('rentalScroll')}
                     >
                         Explore
                     </Button>

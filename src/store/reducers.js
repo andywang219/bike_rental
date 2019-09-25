@@ -9,7 +9,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.SET_CART:
             return {
                 ...state,
-                cart: [...action.payload]
+                cart: [...state.cart, ...action.payload]
             }
         default: 
     }
