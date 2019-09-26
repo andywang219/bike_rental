@@ -12,6 +12,17 @@
     font-size: 3.3em;
 }
 
+#checkoutBtn {
+    margin: 17px 0;
+}
+
+#checkoutLink {
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-decoration: none;
+}
+
 .cartItem {
     margin: 10px;
     display: flex;

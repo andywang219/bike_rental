@@ -58,7 +58,7 @@ class App extends Component {
 					</Switch>
 				</div>
 				<Navbar bg='light' expand='lg' fixed='top' style={{width: '100%'}}>
-					<Navbar.Brand><Link to='/' style={{textDecoration: 'none'}}>Bikey</Link></Navbar.Brand>
+					<Navbar.Brand><Link to='/' style={{textDecoration: 'none'}}>VikingBiking</Link></Navbar.Brand>
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 					<Navbar.Collapse id="responsive-navbar-nav">
 						<Nav className="mr-auto">

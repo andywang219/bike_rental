@@ -78,7 +78,6 @@ class Home extends Component {
                 <Jumbotron fluid>
                     <h1 className='jumboText'>Let's Get Riding!</h1>
                     <h2 className='subJumboText'>Your Adventure Awaits</h2>
-                    <p>In Progress</p>
                     <Button 
                         id='learnMore' 
                         size='lg' 

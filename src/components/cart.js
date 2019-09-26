@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import * as actionTypes from '../store/actions';
 import { connect } from 'react-redux'
 import bikes from '../data/bikerentals.json';
@@ -11,8 +12,11 @@ class Cart extends Component {
         this.state = {
             itemQuantity: {},
             products: {},
-            selectedItem: {}
+            selectedItem: {}, 
+            good: false
         }
+
+        this.good = false
     }
     
     componentDidMount() {
@@ -61,6 +65,17 @@ class Cart extends Component {
         this.props.onUpdateCart() // resets the cart in redux
         this.props.onSetCart(cart)
         cart = []
+
+        this.canProceed()
+    }
+
+    canProceed() {
+        let cart = this.props.cart
+        if(cart.includes(1) || cart.includes(2) || cart.includes(3)) {
+            this.good = true
+        } else {
+            this.good = false
+        }
     }
 
     convertJson() {
@@ -71,20 +86,28 @@ class Cart extends Component {
 
     // {itemId: quantity}
     getQuantity() {
-        if(this.props.cart.length === 0) {
-            this.setState({cartTitle: 'Your Cart is Empty'})
-        } else {
-            let itemCount = {}
+        let itemCount = {}
 
-            for(let id of this.props.cart) {
-                itemCount[id] = (itemCount[id] || 0) + 1
-            }
-
-            this.setState({itemQuantity: itemCount, cartTitle: 'Your Cart'})
+        for(let id of this.props.cart) {
+            itemCount[id] = (itemCount[id] || 0) + 1
         }
+
+        this.setState({
+            itemQuantity: itemCount
+        }, this.canProceed())
     }
 
     render() {
+        let proceed = (
+            <div style={{textAlign: 'center'}}>
+                <Button id='checkoutBtn' disabled><Link to='#' id='checkoutLink' disabled>Proceed to Checkout</Link></Button>
+                <p>Please add a bike before proceeding</p>
+            </div>
+        )
+        
+        if(this.good) {
+            proceed = (<Button id='checkoutBtn'><Link to='/checkout' id='checkoutLink'>Proceed to Checkout</Link></Button>)
+        }
 
         return (
             <div>
@@ -132,6 +155,8 @@ class Cart extends Component {
                             }
                         })
                     }
+
+                    {proceed}
                 </div>
             </div>
         )
