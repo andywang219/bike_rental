@@ -1,0 +1,23 @@
+.checkoutTitle {
+    margin-top: 1.5em;
+    margin-bottom: 15px;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 3.3em;
+}
+
+.buyerInfo {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.info {
+    margin: 15px;
+}
+
+.infoTitle {
+    margin-bottom: 25px;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.2em;
+}
