@@ -35,7 +35,7 @@ class Home extends Component {
                             <img className='bikeImg' src={bike.image} alt={bike.name} />
                             <h4><Link to={`/${bike.product_type}/${bike.id}`} className='shopLink'>{bike.name}</Link></h4>
                             <p>${bike.price}</p>
-                            <Button onClick={() => this.cartHandler(bike)}>Add to Cart</Button>
+                            <Button onClick={() => this.cartHandler(bike)}>Quick Add to Cart</Button>
                         </div>
                     )
                 }
@@ -50,7 +50,7 @@ class Home extends Component {
                             <img className='bikeImg' src={bike.image} alt={bike.name} />
                             <h4><Link to={`/${bike.product_type}/${bike.id}`} className='shopLink'>{bike.name}</Link></h4>
                             <p>${bike.price}</p>
-                            <Button onClick={() => this.cartHandler(bike)}>Add to Cart</Button>
+                            <Button onClick={() => this.cartHandler(bike)}>Quick Add to Cart</Button>
                         </div>
                     )
                 }
@@ -65,7 +65,7 @@ class Home extends Component {
                             <img className='bikeImg' src={bike.image} alt={bike.name} />
                             <h4><Link to={`/${bike.product_type}/${bike.id}`} className='shopLink'>{bike.name}</Link></h4>
                             <p>${bike.price}</p>
-                            <Button onClick={() => this.cartHandler(bike)}>Add to Cart</Button>
+                            <Button onClick={() => this.cartHandler(bike)}> Add to Cart</Button>
                         </div>
                     )
                 }
