@@ -9,13 +9,20 @@ class itemPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            itemData: {}
+            itemData: {},
+            quantityToAdd: 1
         }
 
         this.cart = []
     }
     componentDidMount() {
        this.getData();
+    }
+
+    handleChangeQuantity(e) {
+        this.setState({
+            quantityToAdd: e.target.value
+        })
     }
 
     getData() {
@@ -30,7 +37,10 @@ class itemPage extends Component {
     }
 
     cartHandler(item) {
-        this.cart.push(item.id)
+        for(var i = 0; i < this.state.quantityToAdd; i++) {
+            this.cart.push(item.id)
+        }
+        
         this.props.onSetCart([...this.cart])
         this.cart = []
     }
@@ -42,7 +52,9 @@ class itemPage extends Component {
                 <h4>{this.state.itemData.name}</h4>
                 <h6 id='description'><strong>Description:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus semper vitae ex id tristique. In sit amet est condimentum, rutrum turpis nec, luctus dui. In vitae gravida tortor. Phasellus quis erat nulla. Nulla facilisi. Aliquam erat volutpat. Nam aliquam aliquet purus.</h6>
                 <p><strong>Price: </strong>${this.state.itemData.price}</p>
-                <Button onClick={() => this.cartHandler(this.state.itemData)}>Add to Cart</Button>
+                <input type='number' style={{width: '85px'}} defaultValue={1} onChange={(e) => this.handleChangeQuantity(e)}/>
+                <br />
+                <Button onClick={() => this.cartHandler(this.state.itemData)} style={{marginTop: '15px'}}>Add to Cart</Button>
             </div>
         )
     }

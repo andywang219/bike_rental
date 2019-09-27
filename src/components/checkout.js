@@ -22,7 +22,8 @@ class CheckOut extends Component {
                 cardCvv: '',
                 expDate: ''
             },
-            complete: false
+            complete: false,
+            continue: false,
         }
     }
 
@@ -49,10 +50,17 @@ class CheckOut extends Component {
         
     }
 
+    handleContinue = () => {
+        this.setState({
+            continue: true
+        })
+        
+    }
+
     render() {
         let state = this.state.user
         
-        if(!this.state.complete) {
+        if(!this.state.complete && !this.state.continue) {
             return (
                 <div>
                     <h1 className='checkoutTitle'>Checkout</h1>
@@ -186,14 +194,24 @@ class CheckOut extends Component {
                             style={{margin: '10px'}}
                         />
                         <br />
-                        <Button style={{marginTop: '25px'}} type='submit' onClick={this.handleCheckout}>Checkout</Button>
+                        <Button style={{marginTop: '25px'}} type='submit' onClick={() => this.handleContinue()}>Continue</Button>
                     </div>
+                </div>
+            )
+        } else if(this.state.continue && !this.state.complete) {
+            return (
+                <div id='confirm'>
+                    <h1 className='checkoutTitle'>Please Confirm Your Information</h1>
+                    <h5>Name: {state.firstName} {state.lastName}</h5>
+                    <h5>Address: {state.address1} {state.address2}</h5>
+                    <h5>{state.city} {state.state} {state.zipCode}</h5>
+                    <Button style={{marginTop: '25px'}} type='submit' onClick={() => this.handleCheckout()}>Checkout</Button>
                 </div>
             )
         } else {
             return (
                 <div>
-                    <h1 className='checkoutTitle'> Thank You for Your Purchase</h1>
+                    <h1 className='checkoutTitle'>Thank You for Your Purchase</h1>
                 </div>
             )
         }

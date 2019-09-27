@@ -1,3 +1,9 @@
+#confirm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .checkoutTitle {
     margin-top: 1.5em;
     margin-bottom: 15px;

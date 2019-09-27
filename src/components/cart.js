@@ -13,10 +13,8 @@ class Cart extends Component {
             itemQuantity: {},
             products: {},
             selectedItem: {}, 
-            good: false
+            total: 0
         }
-
-        this.good = false
     }
     
     componentDidMount() {
@@ -24,6 +22,50 @@ class Cart extends Component {
         this.getQuantity()
     }
 
+    // modify Json file for easier access
+    convertJson() {
+        let hash = {}
+
+        bikes.products.map((data) => {
+            hash[data.id] = data
+            return 1
+        })
+
+        this.setState({
+            products: {...hash}
+        })
+    }
+
+    // get the quantity of each item in cart {itemId: quantity}
+    getQuantity() {
+        let itemCount = {}
+
+        for(let id of this.props.cart) {
+            itemCount[id] = (itemCount[id] || 0) + 1
+        }
+
+        this.setState({
+            itemQuantity: itemCount,
+            selectedItem: itemCount
+        })
+
+        this.getTotal()
+    }
+
+    getTotal() {
+        let sum = 0
+
+        Object.keys(this.state.itemQuantity).map((item) => {
+            sum += (this.state.itemQuantity[item] * this.state.products[item].price)
+            return 1
+        })
+
+        this.setState({
+            total: sum
+        })
+    }
+
+    // record the amount user wants to delete
     handleChangeQuantity(id, e) {
         let newTotal = {
             [id] : e.target.value
@@ -36,6 +78,7 @@ class Cart extends Component {
         })
     }
 
+    // remove x quantity
     handleRemove(id) {
         let quantity = this.state.itemQuantity
         
@@ -50,8 +93,10 @@ class Cart extends Component {
                 }
             }, this.updateCart())
         }
+        this.getTotal()
     }
 
+    // update the cart
     updateCart() {
         let cart = []
 
@@ -65,36 +110,15 @@ class Cart extends Component {
         this.props.onUpdateCart() // resets the cart in redux
         this.props.onSetCart(cart)
         cart = []
-
-        this.canProceed()
     }
 
+    // can only checkout if there is a bike in the cart
     canProceed() {
-        let cart = this.props.cart
-        if(cart.includes(1) || cart.includes(2) || cart.includes(3)) {
-            this.good = true
-        } else {
-            this.good = false
-        }
-    }
-
-    convertJson() {
-        this.setState({
-            products: {...bikes.products}
-        })
-    }
-
-    // {itemId: quantity}
-    getQuantity() {
-        let itemCount = {}
-
-        for(let id of this.props.cart) {
-            itemCount[id] = (itemCount[id] || 0) + 1
+        if((this.state.itemQuantity[1] > 0) || (this.state.itemQuantity[2] > 0) || (this.state.itemQuantity[3] > 0)) {
+            return true
         }
 
-        this.setState({
-            itemQuantity: itemCount
-        }, this.canProceed())
+        return false
     }
 
     render() {
@@ -105,7 +129,7 @@ class Cart extends Component {
             </div>
         )
         
-        if(this.good) {
+        if(this.canProceed()) {
             proceed = (<Button id='checkoutBtn'><Link to='/checkout' id='checkoutLink'>Proceed to Checkout</Link></Button>)
         }
 
@@ -115,7 +139,6 @@ class Cart extends Component {
                 <div id='cart'>
                     {
                         Object.keys(this.state.itemQuantity).map((item) => {
-                            let itemId = item - 1
                             let options = []
                             
                             for(var i = this.state.itemQuantity[item]; i > 0; i--) {
@@ -124,13 +147,13 @@ class Cart extends Component {
 
                             if(this.state.itemQuantity[item] > 0) {
                                 return (
-                                    <div className='cartItem' key={itemId}> 
+                                    <div className='cartItem' key={item}> 
                                         < img 
-                                            src={this.state.products[parseInt(itemId)].image}
-                                            alt={this.state.products[parseInt(itemId)].name}
+                                            src={this.state.products[(item)].image}
+                                            alt={this.state.products[(item)].name}
                                         />
                                         <h6 className='cartDesc'>
-                                            {this.state.products[parseInt(itemId)].name}
+                                            {this.state.products[(item)].name}
                                         </h6>
                                         <h6 className='cartDesc'>
                                             Quantity: {this.state.itemQuantity[item]}
@@ -155,7 +178,7 @@ class Cart extends Component {
                             }
                         })
                     }
-
+                    <p>Total: ${this.state.total}</p>
                     {proceed}
                 </div>
             </div>
